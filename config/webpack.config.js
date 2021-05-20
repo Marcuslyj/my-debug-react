@@ -338,6 +338,9 @@ module.exports = function (webpackEnv) {
         'react-dom': path.resolve(__dirname, '../src/react/packages/react-dom'),
         'shared': path.resolve(__dirname, '../src/react/packages/shared'),
         'react-reconciler': path.resolve(__dirname, '../src/react/packages/react-reconciler'),
+        'legacy-events': path.resolve(__dirname, "../src/react/packages/legacy-events"),
+        'scheduler': path.resolve(__dirname, '../src/react/packages/scheduler'),
+        // 'scheduler': path.resolve(__dirname, '../src/react/packages/scheduler'),
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding

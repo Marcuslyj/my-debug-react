@@ -98,6 +98,7 @@ function getClientEnvironment(publicUrl) {
     __PROFILE__: true,
     __UMD__: true,
     __EXPERIMENTAL__: true,
+    __VARIANT__: true, // 处理__VARIANT__ not defined报错
     'process.env': Object.keys(raw).reduce((env, key) => {
       env[key] = JSON.stringify(raw[key]);
       return env;
