@@ -256,7 +256,9 @@ export function updateContainer(
   if (__DEV__) {
     onScheduleRoot(container, element);
   }
+  // current？
   const current = container.current;
+  // ?
   const eventTime = requestEventTime();
   if (__DEV__) {
     // $FlowExpectedError - jest isn't a global, and isn't recognized outside of tests

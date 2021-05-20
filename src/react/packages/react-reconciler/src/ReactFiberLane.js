@@ -69,6 +69,7 @@ const OffscreenLanePriority: LanePriority = 1;
 
 export const NoLanePriority: LanePriority = 0;
 
+// 为什么31
 const TotalLanes = 31;
 
 export const NoLanes: Lanes = /*                        */ 0b0000000000000000000000000000000;

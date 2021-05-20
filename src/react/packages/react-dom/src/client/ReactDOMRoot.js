@@ -60,6 +60,10 @@ import {
 } from 'react-reconciler/src/ReactRootTags';
 
 function ReactDOMRoot(container: Container, options: void | RootOptions) {
+  // 
+  console.log('define _internalRoot')
+
+  // export const ConcurrentRoot = 2;
   this._internalRoot = createRootImpl(container, ConcurrentRoot, options);
 }
 
@@ -68,6 +72,7 @@ function ReactDOMBlockingRoot(
   tag: RootTag,
   options: void | RootOptions,
 ) {
+  // 
   this._internalRoot = createRootImpl(container, tag, options);
 }
 
@@ -98,6 +103,7 @@ ReactDOMRoot.prototype.render = ReactDOMBlockingRoot.prototype.render = function
       }
     }
   }
+  // 
   updateContainer(children, root, null, null);
 };
 
@@ -122,6 +128,7 @@ function createRootImpl(
   tag: RootTag,
   options: void | RootOptions,
 ) {
+  console.log('createRootImpl', container, ConcurrentRoot, options)
   // Tag is either LegacyRoot or Concurrent Root
   const hydrate = options != null && options.hydrate === true;
   const hydrationCallbacks =
@@ -131,7 +138,11 @@ function createRootImpl(
       options.hydrationOptions != null &&
       options.hydrationOptions.mutableSources) ||
     null;
+    
+  // 
   const root = createContainer(container, tag, hydrate, hydrationCallbacks);
+  // debugger
+  // container[internalContainerInstanceKey] = root.current
   markContainerAsRoot(root.current, container);
   const containerNodeType = container.nodeType;
 
@@ -172,11 +183,14 @@ export function createRoot(
   container: Container,
   options?: RootOptions,
 ): RootType {
+  console.log('createRoot')
   invariant(
     isValidContainer(container),
     'createRoot(...): Target container is not a DOM element.',
   );
   warnIfReactDOMContainerInDEV(container);
+  // 
+  console.log('new ReactDOMRoot', container, options)
   return new ReactDOMRoot(container, options);
 }
 
@@ -196,6 +210,7 @@ export function createLegacyRoot(
   container: Container,
   options?: RootOptions,
 ): RootType {
+  // debugger
   return new ReactDOMBlockingRoot(container, LegacyRoot, options);
 }
 

@@ -6,7 +6,7 @@
  *
  * @flow
  */
-
+// 这是什么标记？
 export type RootTag = 0 | 1 | 2;
 
 export const LegacyRoot = 0;

@@ -371,6 +371,8 @@ export function getWorkInProgressRoot(): FiberRoot | null {
 }
 
 export function requestEventTime() {
+  // debugger
+  // (0b0000000 & (0b0010000 | 0b0100000)) !== 0b0000000
   if ((executionContext & (RenderContext | CommitContext)) !== NoContext) {
     // We're inside React, so it's fine to read the actual time.
     return now();
@@ -390,10 +392,13 @@ export function getCurrentTime() {
 }
 
 export function requestUpdateLane(fiber: Fiber): Lane {
+  // debugger
   // Special cases
   const mode = fiber.mode;
+  // if(mode !== BlockingMode)
   if ((mode & BlockingMode) === NoMode) {
     return (SyncLane: Lane);
+  // if(mode !== ConcurrentMode)
   } else if ((mode & ConcurrentMode) === NoMode) {
     return getCurrentPriorityLevel() === ImmediateSchedulerPriority
       ? (SyncLane: Lane)
@@ -430,6 +435,7 @@ export function requestUpdateLane(fiber: Fiber): Lane {
   //
   // We'll do the same for `currentEventPendingLanes` below.
   if (currentEventWipLanes === NoLanes) {
+    // debugger
     currentEventWipLanes = workInProgressRootIncludedLanes;
   }
 
@@ -446,6 +452,7 @@ export function requestUpdateLane(fiber: Fiber): Lane {
 
   // TODO: Remove this dependency on the Scheduler priority.
   // To do that, we're replacing it with an update lane priority.
+  debugger
   const schedulerPriority = getCurrentPriorityLevel();
 
   // The old behavior was using the priority level of the Scheduler.
@@ -3350,6 +3357,7 @@ let didWarnAboutUnmockedScheduler = false;
 
 export function warnIfUnmockedScheduler(fiber: Fiber) {
   if (__DEV__) {
+    // debugger
     if (
       didWarnAboutUnmockedScheduler === false &&
       Scheduler.unstable_flushAllWithoutAsserting === undefined

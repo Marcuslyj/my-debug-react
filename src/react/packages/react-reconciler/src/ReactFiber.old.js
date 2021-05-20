@@ -429,6 +429,8 @@ export function resetWorkInProgress(workInProgress: Fiber, renderLanes: Lanes) {
 }
 
 export function createHostRootFiber(tag: RootTag): Fiber {
+  // debugger
+  // mode
   let mode;
   if (tag === ConcurrentRoot) {
     mode = ConcurrentMode | BlockingMode | StrictMode;
@@ -445,6 +447,7 @@ export function createHostRootFiber(tag: RootTag): Fiber {
     mode |= ProfileMode;
   }
 
+  // export const HostRoot = 3; // Root of a host tree. Could be nested inside another node.
   return createFiber(HostRoot, null, null, mode);
 }
 

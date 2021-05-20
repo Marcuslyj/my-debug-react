@@ -27,6 +27,7 @@ import {initializeUpdateQueue} from './ReactUpdateQueue.old';
 import {LegacyRoot, BlockingRoot, ConcurrentRoot} from './ReactRootTags';
 
 function FiberRootNode(containerInfo, tag, hydrate) {
+  // debugger
   this.tag = tag;
   this.containerInfo = containerInfo;
   this.pendingChildren = null;
@@ -86,17 +87,23 @@ export function createFiberRoot(
   hydrate: boolean,
   hydrationCallbacks: null | SuspenseHydrationCallbacks,
 ): FiberRoot {
+  // debugger
+  // root是什么？不是fiber
   const root: FiberRoot = (new FiberRootNode(containerInfo, tag, hydrate): any);
   if (enableSuspenseCallback) {
     root.hydrationCallbacks = hydrationCallbacks;
-  }
+  } 
 
   // Cyclic construction. This cheats the type system right now because
   // stateNode is any.
   const uninitializedFiber = createHostRootFiber(tag);
+  // current指向
   root.current = uninitializedFiber;
+  // stateNode
+  // debugger
   uninitializedFiber.stateNode = root;
 
+  // 定义uninitializedFiber的updateQueue
   initializeUpdateQueue(uninitializedFiber);
 
   return root;
